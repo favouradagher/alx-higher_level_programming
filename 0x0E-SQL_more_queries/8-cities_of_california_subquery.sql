@@ -1,10 +1,10 @@
--- Use the hbtn_0d_usa database
-USE hbtn_0d_usa;
+-- lists all the cities of California in the database hbtn_0d_usa
+   -- states table contains only one record where name = California
+   -- Results must be sorted in ascending order by cities.id
+   -- The database name will be passed as an argument of the mysql command
 
--- Select the state_id for California
-SET @california_state_id := (SELECT id FROM states WHERE name = 'California');
-
--- Select all the cities of California
-SELECT * FROM cities
-WHERE state_id = @california_state_id
-ORDER BY id ASC;
+SELECT id, name FROM cities
+WHERE state_id = (
+      SELECT id FROM states
+      WHERE name = "California")
+ORDER BY id;
